@@ -14,11 +14,11 @@ function App() {
           `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API}`
         );
         const data = await resp.json();
-        await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve();
-          }, 2000);
-        });
+        // await new Promise((resolve) => {
+        //   setTimeout(() => {
+        //     resolve();
+        //   }, 2000);
+        // });
         setGames(data.results);
         setLoading(false);
       } catch (err) {
@@ -37,6 +37,7 @@ function App() {
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <h1 className="font-bold mb-6 text-2xl">Popular Video Games</h1>
+
       {games.map((game) => {
         return (
           <div
@@ -44,7 +45,7 @@ function App() {
             className=" flex flex-col border border-gray-100 mb-8 rounded rounded-lg  w-[90%] max-w-[700px] max-h-[400px] overflow-hidden shadow-lg"
           >
             <p className="text-left text-xl  m-2 font-bold min-h-[40px]">
-              {game.slug.charAt(0).toUpperCase() + game.slug.slice(1)}
+              {game.name.charAt(0).toUpperCase() + game.name.slice(1)}
             </p>
             <p className="text-left text-lg m-2 -mt-2 min-h-[30px]">
               Rating : {game.rating}
@@ -52,7 +53,7 @@ function App() {
             <img
               src={game.background_image}
               alt={game.slug}
-              className="h-[350px] object-cover w-[100%]"
+              className="h-[350px] object-cover w-[100%] z-3"
             />
           </div>
         );
